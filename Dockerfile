@@ -1,14 +1,16 @@
-# Use Java 17 base image
-FROM eclipse-temurin:17-jdk-alpine
-
-# Set working directory
+# =========================
+# Build Stage
+# =========================
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy jar file into container
-COPY target/*.jar app.jar
-
-# Expose application port
+# =========================
+# Run Stage
+# =========================
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
