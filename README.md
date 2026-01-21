@@ -14,11 +14,6 @@ Swagger UI (No frontend just used for documentation of available endpoints in my
 
 https://pexp-production.up.railway.app/swagger-ui/index.html
 
-Repository:
-
-https://github.com/logeswaran2004/pexp
-
----
 
 ## Tech Stack
 
